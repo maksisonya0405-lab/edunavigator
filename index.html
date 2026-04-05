@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduNavigator</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid #e2e8f0;
+      backdrop-filter: blur(6px);
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+    .brand {
+      font-size: 30px;
+      font-weight: 700;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: #64748b;
+    }
+    nav a {
+      text-decoration: none;
+      color: #475569;
+      margin-left: 24px;
+      font-size: 14px;
+    }
+    .hero, .section {
+      padding: 72px 0;
+    }
+    .hero-grid, .two-col, .catalog-grid, .benefit-grid, .steps-grid, .form-grid {
+      display: grid;
+      gap: 28px;
+    }
+    .hero-grid, .two-col, .steps-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+    .catalog-grid, .benefit-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .badge {
+      display: inline-block;
+      padding: 10px 16px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 58px;
+      line-height: 1.05;
+      margin: 0;
+    }
+    h2 {
+      font-size: 38px;
+      line-height: 1.15;
+      margin: 0 0 14px;
+    }
+    h3 {
+      font-size: 24px;
+      margin: 0;
+    }
+    .accent { color: #1d4ed8; }
+    .lead {
+      font-size: 20px;
+      color: #475569;
+      max-width: 760px;
+    }
+    .btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 22px;
+      border-radius: 18px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .btn-primary {
+      background: #1d4ed8;
+      color: #fff;
+    }
+    .btn-secondary {
+      background: #fff;
+      color: #0f172a;
+      border: 1px solid #cbd5e1;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .stat, .card, .feature-card, .uni-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 28px;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.05);
+    }
+    .stat {
+      padding: 18px;
+      text-align: center;
+    }
+    .stat strong {
+      display: block;
+      font-size: 30px;
+    }
+    .hero-panel {
+      background: linear-gradient(135deg, #1d4ed8, #06b6d4);
+      border-radius: 34px;
+      padding: 30px;
+      color: white;
+      box-shadow: 0 18px 40px rgba(29,78,216,0.25);
+    }
+    .hero-panel-inner {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 26px;
+      padding: 24px;
+    }
+    .mini {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      opacity: 0.95;
+    }
+    .pill {
+      background: rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 14px 16px;
+      margin-top: 12px;
+    }
+    .section-title {
+      color: #1d4ed8;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .card, .feature-card, .uni-card {
+      padding: 28px;
+    }
+    .dark-card {
+      background: #0f172a;
+      color: white;
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 10px 24px rgba(15,23,42,0.15);
+    }
+    .dark-card li, .muted {
+      color: #475569;
+    }
+    .dark-card .muted, .dark-card ul {
+      color: #cbd5e1;
+    }
+    .feature-icon {
+      font-size: 40px;
+    }
+    .catalog {
+      background: #fff;
+      border-top: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .city {
+      color: #1d4ed8;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .uni-card p {
+      color: #475569;
+      margin: 10px 0;
+    }
+    .uni-card b {
+      color: #0f172a;
+    }
+    .steps-box {
+      background: #1d4ed8;
+      color: #fff;
+      border-radius: 30px;
+      padding: 30px;
+      box-shadow: 0 18px 40px rgba(29,78,216,0.2);
+    }
+    .step {
+      background: rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 16px 18px;
+      margin-top: 14px;
+    }
+    .contact-wrap {
+      background: #0f172a;
+      color: white;
+      border-radius: 32px;
+      padding: 38px;
+      box-shadow: 0 18px 40px rgba(15,23,42,0.18);
+    }
+    .form-grid {
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 22px;
+    }
+    input {
+      width: 100%;
+      padding: 15px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      color: white;
+    }
+    input::placeholder {
+      color: #94a3b8;
+    }
+    footer {
+      padding: 24px;
+      text-align: center;
+      color: #64748b;
+      font-size: 14px;
+    }
+    @media (max-width: 900px) {
+      .hero-grid, .two-col, .catalog-grid, .benefit-grid, .steps-grid, .form-grid {
+        grid-template-columns: 1fr;
+      }
+      nav { display: none; }
+      h1 { font-size: 40px; }
+      h2 { font-size: 30px; }
+      .stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <div>
+        <div class="brand">EduNavigator</div>
+        <div class="subtitle">Платформа вибору ВНЗ для абітурієнтів</div>
+      </div>
+      <nav>
+        <a href="#about">Про платформу</a>
+        <a href="#benefits">Переваги</a>
+        <a href="#catalog">Каталог</a>
+        <a href="#contact">Контакти</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge">EdTech marketplace для вступу</div>
+        <h1>Обирай університет <span class="accent">усвідомлено</span>, а не навмання</h1>
+        <p class="lead">
+          EduNavigator — це онлайн-платформа, яка допомагає абітурієнтам знайти, порівняти та обрати
+          заклад вищої освіти за спеціальністю, бюджетом, країною та форматом навчання.
+        </p>
+        <div class="btns">
+          <a class="btn btn-primary" href="#catalog">Переглянути ВНЗ</a>
+          <a class="btn btn-secondary" href="#contact">Отримати консультацію</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong>150+</strong><span class="muted">програм</span></div>
+          <div class="stat"><strong>50+</strong><span class="muted">ВНЗ</span></div>
+          <div class="stat"><strong>1</strong><span class="muted">платформа вибору</span></div>
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <div class="hero-panel-inner">
+          <div class="mini">Швидкий підбір</div>
+          <h2>Знайди свій напрям за 3 кроки</h2>
+          <div class="pill">Спеціальність: <b>Психологія</b></div>
+          <div class="pill">Бюджет: <b>до 35 000 грн/рік</b></div>
+          <div class="pill">Формат: <b>денна або дистанційна</b></div>
+          <div class="btns">
+            <a class="btn btn-secondary" href="#contact" style="background:white;color:#1d4ed8;border:none;">Підібрати університет</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <div class="container two-col">
+      <div class="card">
+        <div class="section-title">Про ідею</div>
+        <h2>Чому саме такий формат сайту</h2>
+        <p class="muted">
+          Платформа створена у форматі онлайн-агрегатора, тому що абітурієнту потрібен не просто сайт з описом,
+          а сервіс, який допомагає порівнювати варіанти, бачити відмінності та приймати рішення на основі
+          структурованої інформації.
+        </p>
+      </div>
+
+      <div class="dark-card">
+        <div class="section-title" style="color:#67e8f9;">Для кого</div>
+        <h2>Цільова аудиторія</h2>
+        <ul>
+          <li>абітурієнти, які обирають майбутню спеціальність та ВНЗ;</li>
+          <li>батьки, які беруть участь у виборі освітнього маршруту;</li>
+          <li>студенти, які розглядають переведення або інші освітні можливості.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="benefits" class="section">
+    <div class="container">
+      <div class="section-title">Переваги</div>
+      <h2>Що робить платформу корисною</h2>
+      <p class="lead" style="font-size:18px;">
+        Сайт поєднує сильні сторони каталогу, консультаційного сервісу та сучасного інтерфейсу,
+        орієнтованого на швидке прийняття рішення.
+      </p>
+
+      <div class="benefit-grid" style="margin-top:28px;">
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3 style="margin-top:12px;">Порівняння ВНЗ</h3>
+          <p class="muted">Збирай декілька університетів в один список і порівнюй умови вступу, вартість, формат навчання та спеціальності.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3 style="margin-top:12px;">Персональний підбір</h3>
+          <p class="muted">Платформа допомагає знайти варіанти за твоїми інтересами, бюджетом, країною та бажаним напрямом навчання.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📝</div>
+          <h3 style="margin-top:12px;">Заявка в одному місці</h3>
+          <p class="muted">Не потрібно переходити між десятками сайтів — залишай заявку та отримуй консультацію прямо на платформі.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalog" class="section catalog">
+    <div class="container">
+      <div class="section-title">Каталог</div>
+      <h2>Приклади університетів на платформі</h2>
+      <p class="muted">Фільтри: країна · спеціальність · бюджет · формат навчання</p>
+
+      <div class="catalog-grid" style="margin-top:28px;">
+        <div class="uni-card">
+          <div class="city">Київ</div>
+          <h3>Київський університет прикладних наук</h3>
+          <p><b>Напрями:</b> Маркетинг, IT, Дизайн</p>
+          <p><b>Вартість:</b> від 32 000 грн/рік</p>
+          <p><b>Формат:</b> денна / дистанційна</p>
+          <a class="btn btn-primary" href="#contact" style="margin-top:10px;">Порівняти</a>
+        </div>
+
+        <div class="uni-card">
+          <div class="city">Львів</div>
+          <h3>Львівський міжнародний інститут</h3>
+          <p><b>Напрями:</b> Право, Психологія, Менеджмент</p>
+          <p><b>Вартість:</b> від 28 000 грн/рік</p>
+          <p><b>Формат:</b> денна / змішана</p>
+          <a class="btn btn-primary" href="#contact" style="margin-top:10px;">Порівняти</a>
+        </div>
+
+        <div class="uni-card">
+          <div class="city">Варшава</div>
+          <h3>Європейський технологічний університет</h3>
+          <p><b>Напрями:</b> Data Science, Бізнес, Фінанси</p>
+          <p><b>Вартість:</b> від 2 400 €/рік</p>
+          <p><b>Формат:</b> денна / англомовна програма</p>
+          <a class="btn btn-primary" href="#contact" style="margin-top:10px;">Порівняти</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container steps-grid">
+      <div class="steps-box">
+        <div class="section-title" style="color:#dbeafe;">Як це працює</div>
+        <h2>Шлях користувача на сайті</h2>
+        <div class="step"><b>1.</b> Оберіть країну, спеціальність або формат навчання.</div>
+        <div class="step"><b>2.</b> Порівняйте університети за ключовими параметрами.</div>
+        <div class="step"><b>3.</b> Отримайте персональну рекомендацію.</div>
+        <div class="step"><b>4.</b> Залиште заявку на консультацію або вступ.</div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">Унікальність</div>
+        <h2>Чим сайт буде кращим за аналоги</h2>
+        <ul class="muted">
+          <li>не просто каталог, а сервіс підтримки вибору;</li>
+          <li>персоналізований підбір ВНЗ і спеціальностей;</li>
+          <li>зрозумілий інтерфейс без перевантаження інформацією;</li>
+          <li>можливість об’єднати порівняння, заявку та консультацію в одному місці;</li>
+          <li>потенціал для AI-рекомендацій та інтерактивних тестів.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="contact-wrap">
+        <div class="section-title" style="color:#67e8f9;">Контакт</div>
+        <h2>Залиш заявку на підбір ВНЗ</h2>
+        <p style="color:#cbd5e1; max-width:760px;">
+          Заповни коротку форму, і платформа допоможе знайти оптимальні варіанти навчання за твоїми цілями,
+          бюджетом та інтересами.
+        </p>
+        <div class="form-grid">
+          <input placeholder="Ім’я" />
+          <input placeholder="Email" />
+          <input placeholder="Спеціальність" />
+        </div>
+        <div class="btns">
+          <a class="btn" href="#" style="background:#22d3ee;color:#0f172a;">Надіслати заявку</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    EduNavigator — навчальний прототип освітньої платформи для вибору ВНЗ
+  </footer>
+</body>
+</html>
